@@ -1348,8 +1348,8 @@ void handleRegister() {
   }
   String html = pageStart("Register");
   html += R"rawliteral(
-  <h1>Register</h1>
   <div class="main">
+    <h1>Register</h1>
     <form action='/save' method='post'>
       <input type="hidden" name="form" value="register">
       <input type="hidden" name="redirect" value="home">
@@ -2170,6 +2170,14 @@ void loop() {
       prefs.clear();
       prefs.end();
       Serial.println("Credentials reset, restarting esp");
+      delay(1000);
+      ESP.restart();
+    }
+    if (readstr == "rst_wifi") {
+      prefs.begin("wifi", false);
+      prefs.clear();
+      prefs.end();
+      Serial.println("Wifi reset, restarting esp");
       delay(1000);
       ESP.restart();
     }
